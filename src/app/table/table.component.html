@@ -6,12 +6,28 @@
 	</div>
 	<mat-table #table [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="playerName">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> playerName </mat-header-cell>
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Player </mat-header-cell>
 			<mat-cell *matCellDef="let player"> {{player.playerName}} </mat-cell>
 		</ng-container>
+		<ng-container matColumnDef="playerPositionCode">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Position </mat-header-cell>
+			<mat-cell *matCellDef="let player"> {{player.playerPositionCode}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="playerTeamsPlayedFor">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Teams </mat-header-cell>
+			<mat-cell *matCellDef="let player"> {{player.playerTeamsPlayedFor}} </mat-cell>
+		</ng-container>
 		<ng-container matColumnDef="shTimeOnIce">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> shTimeOnIce </mat-header-cell>
-			<mat-cell *matCellDef="let player"> {{player.shTimeOnIce / 60}} </mat-cell>
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Time On Ice </mat-header-cell>
+			<mat-cell *matCellDef="let player">{{(player.shTimeOnIce - (player.shTimeOnIce % 60))/60}}:{{(player.shTimeOnIce % 60)}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="gamesPlayed">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Games played </mat-header-cell>
+			<mat-cell *matCellDef="let player"> {{player.gamesPlayed}} </mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="shPoints">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Points </mat-header-cell>
+			<mat-cell *matCellDef="let player"> {{player.shPoints}} </mat-cell>
 		</ng-container>
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

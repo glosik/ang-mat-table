@@ -45,11 +45,19 @@ export interface Player {
 })
 
 export class TableComponent implements AfterViewInit {
-	displayedColumns = ['playerName', 'shTimeOnIce'];
-	shorthanded = players;
+	private left = false;
+	private displayedColumns = [
+		'playerName',
+		'playerPositionCode',
+		'playerTeamsPlayedFor',
+		'shTimeOnIce',
+		'shPoints',
+		'gamesPlayed'
+	];
+	private shorthanded: any = players;
 	// TOD: fix Property 'data' does not exist on type 'typeof '*.json''.
-	PLAYER_DATA: Player[] = this.shorthanded.data;
-	dataSource = new MatTableDataSource(this.PLAYER_DATA);
+	private PLAYER_DATA: Player[] = this.shorthanded.data;
+	private dataSource = new MatTableDataSource(this.PLAYER_DATA);
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 
@@ -58,7 +66,11 @@ export class TableComponent implements AfterViewInit {
 		this.dataSource.sort = this.sort;
 	}
 
-	applyFilter(filterValue: string) {
+	private pos(str) {
+		this.left = true;
+	}
+
+	private applyFilter(filterValue: string) {
 		filterValue = filterValue.trim(); // Remove whitespace
 		filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
 		this.dataSource.filter = filterValue;
