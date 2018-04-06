@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import * as players from './shorthanded.json';
+import * as games from './schedule.json';
 
 export interface Player {
 	'gamesPlayed': number;
@@ -55,11 +56,49 @@ export class TableComponent implements AfterViewInit {
 		'gamesPlayed'
 	];
 	private shorthanded: any = players;
+	private schedule: any = games;
 	// TOD: fix Property 'data' does not exist on type 'typeof '*.json''.
 	private PLAYER_DATA: Player[] = this.shorthanded.data;
 	private dataSource = new MatTableDataSource(this.PLAYER_DATA);
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
+
+	constructor() {
+		let prop, d;
+		const obj = this.schedule.dates;
+		let arr = [];
+		for (prop in obj) {
+			if (obj.hasOwnProperty(prop)) {
+				const daily = obj[prop].games;
+				for (d in daily) {
+					if (daily.hasOwnProperty(d)) {
+						arr.push(
+							{
+								date: daily[d].gameDate.split('T')[0],
+								away: daily[d].teams.away.team.id,
+								home: daily[d].teams.home.team.id,
+							}
+						);
+					}
+				}
+			}
+		}
+		arr = arr.reduce(function(acc, cur, i) { acc[i] = cur; return acc; }, {});
+		this.gamesAmount(6, 13, arr);
+	}
+
+	gamesAmount(id1, id2, ar) {
+		for (const prop in ar) {
+			if (ar.hasOwnProperty(prop)) {
+				let index;
+				index = (ar[prop].away === id1)
+				console.log('data', ar[prop].away);
+			}
+		}
+		// let data = ar.map( p => {console.log(p);} );
+
+		return id1;
+	}
 
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
