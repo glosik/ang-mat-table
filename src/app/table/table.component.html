@@ -7,7 +7,7 @@
 	<mat-table #table [dataSource]="dataSource" matSort>
 		<ng-container matColumnDef="playerName">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Player </mat-header-cell>
-			<mat-cell *matCellDef="let player"> {{player.playerName}} </mat-cell>
+			<mat-cell *matCellDef="let player" (click)="fil($event)"> {{player.playerName}} </mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="playerPositionCode">
 			<mat-header-cell *matHeaderCellDef mat-sort-header> Position </mat-header-cell>

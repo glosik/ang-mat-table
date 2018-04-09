@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import * as players from './shorthanded.json';
-import * as games from './schedule.json';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import * as players from '../data/shorthanded.json';
+import * as games from '../data/schedule.json';
 
 export interface Player {
 	'gamesPlayed': number;
@@ -87,11 +87,11 @@ export class TableComponent implements AfterViewInit {
 		this.gamesAmount(6, 13, arr);
 	}
 
-	gamesAmount(id1, id2, ar) {
+	private gamesAmount(id1, id2, ar) {
 		for (const prop in ar) {
 			if (ar.hasOwnProperty(prop)) {
 				let index;
-				index = (ar[prop].away === id1)
+				index = (ar[prop].away === id1);
 				console.log('data', ar[prop].away);
 			}
 		}
@@ -103,6 +103,11 @@ export class TableComponent implements AfterViewInit {
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
+	}
+
+	private fil(event) {
+		console.log(event.target.textContent);
+		this.applyFilter(event.target.textContent);
 	}
 
 	private pos(str) {
