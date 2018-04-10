@@ -9,18 +9,21 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 
 const appRoutes: Routes = [
 	// { path: '**', component: PageNotFoundComponent },
-	{ path: 'table', component: TableComponent }
+	{ path: 'table', component: TableComponent },
+	{ path: 'calendar', component: ScheduleComponent }
 ];
 
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		TableComponent
+		TableComponent,
+		ScheduleComponent
 	],
 	imports: [
 		BrowserModule,
